@@ -65,8 +65,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
     }
+
+    fun onSuperBackPressed() {
+
+        super.onBackPressed()
+    }
+
 
     @Subscribe
     fun onEvent(status: String) {

@@ -38,7 +38,20 @@ class ShoutcastListAdapter(private val activity: MainActivity, private val shout
                             "radio_$positionItem",
                             "drawable",
                             activity.packageName))
-            view.setOnClickListener { onItemClick() }
+            if (positionItem == 0) {
+                picture.setImageResource(
+                        activity.resources.getIdentifier(
+                                "ic_action_exit",
+                                "drawable",
+                                activity.packageName))
+
+                view.setOnClickListener { onItemClickBack() }
+            } else
+                view.setOnClickListener { onItemClick() }
+        }
+
+        private fun onItemClickBack() {
+            activity.onSuperBackPressed()
         }
 
         private fun onItemClick() {
