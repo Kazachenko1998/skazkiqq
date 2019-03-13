@@ -1,6 +1,7 @@
 package com.mcakir.radio.util
 
 import android.support.v7.widget.RecyclerView
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -31,7 +32,7 @@ class ShoutcastListAdapter(private val activity: MainActivity, private val shout
     inner class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         private lateinit var picture: ImageView
         private var positionItem: Int = 0
-
+        private var oldTime = 0L
         fun onBind(position: Int) {
             positionItem = position % shoutcasts.size
             picture = view.findViewById(R.id.picture)
@@ -47,16 +48,15 @@ class ShoutcastListAdapter(private val activity: MainActivity, private val shout
                                 "drawable",
                                 activity.packageName))
 
-                view.setOnClickListener {
-                    val questionsView = view.findViewById<RelativeLayout>(R.id.exit_view)
-                    questionsView.alpha = 0f
-                    questionsView.visibility = View.VISIBLE
-                    questionsView.animate().alpha(1f)
-                    val okBtn = view.findViewById<TextView>(R.id.yes_btn)
-                    okBtn.setOnClickListener { onItemClickBack() }
-                    val noBtn = view.findViewById<TextView>(R.id.no_btn)
-                    noBtn.setOnClickListener { questionsView.animate().alpha(0f).withEndAction { questionsView.visibility = View.GONE } }
-
+                view.setOnTouchListener { view: View, motionEvent: MotionEvent ->
+                    if (motionEvent.action == MotionEvent.ACTION_DOWN){
+                        if (System.currentTimeMillis() - oldTime < 500){
+                            onItemClickBack()
+                        }else{
+                            oldTime = System.currentTimeMillis()
+                        }
+                    }
+                    true
                 }
             } else
                 view.setOnClickListener { onItemClick() }
