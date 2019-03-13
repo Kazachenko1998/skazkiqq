@@ -41,18 +41,13 @@ class ShoutcastListAdapter(private val activity: MainActivity, private val shout
                             "radio_$positionItem",
                             "drawable",
                             activity.packageName))
-            if (positionItem == 0) {
-                picture.setImageResource(
-                        activity.resources.getIdentifier(
-                                "ic_action_exit",
-                                "drawable",
-                                activity.packageName))
-
-                view.setOnTouchListener { view: View, motionEvent: MotionEvent ->
-                    if (motionEvent.action == MotionEvent.ACTION_DOWN){
-                        if (System.currentTimeMillis() - oldTime < 500){
+            if (positionItem == shoutcasts.size - 1) {
+                picture.setImageDrawable(activity.resources.getDrawable(R.drawable.ic_action_exit))
+                view.setOnTouchListener { _: View, motionEvent: MotionEvent ->
+                    if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                        if (System.currentTimeMillis() - oldTime < 500) {
                             onItemClickBack()
-                        }else{
+                        } else {
                             oldTime = System.currentTimeMillis()
                         }
                     }
