@@ -55,7 +55,7 @@ class ShoutcastListAdapter(private val activity: MainActivity, private val shout
                     val okBtn = view.findViewById<TextView>(R.id.yes_btn)
                     okBtn.setOnClickListener { onItemClickBack() }
                     val noBtn = view.findViewById<TextView>(R.id.no_btn)
-                    okBtn.setOnClickListener { questionsView.animate().alpha(0f).withEndAction { questionsView.visibility = View.GONE } }
+                    noBtn.setOnClickListener { questionsView.animate().alpha(0f).withEndAction { questionsView.visibility = View.GONE } }
 
                 }
             } else
