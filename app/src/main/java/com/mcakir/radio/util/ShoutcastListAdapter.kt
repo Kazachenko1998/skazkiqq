@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.mcakir.radio.MainActivity
 import com.mcakir.radio.R
 import kotlinx.android.synthetic.main.content_main.*
@@ -45,7 +47,17 @@ class ShoutcastListAdapter(private val activity: MainActivity, private val shout
                                 "drawable",
                                 activity.packageName))
 
-                view.setOnClickListener { onItemClickBack() }
+                view.setOnClickListener {
+                    val questionsView = view.findViewById<RelativeLayout>(R.id.exit_view)
+                    questionsView.alpha = 0f
+                    questionsView.visibility = View.VISIBLE
+                    questionsView.animate().alpha(1f)
+                    val okBtn = view.findViewById<TextView>(R.id.yes_btn)
+                    okBtn.setOnClickListener { onItemClickBack() }
+                    val noBtn = view.findViewById<TextView>(R.id.no_btn)
+                    okBtn.setOnClickListener { questionsView.animate().alpha(0f).withEndAction { questionsView.visibility = View.GONE } }
+
+                }
             } else
                 view.setOnClickListener { onItemClick() }
         }

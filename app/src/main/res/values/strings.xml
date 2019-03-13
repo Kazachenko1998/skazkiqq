@@ -5,4 +5,7 @@
     <string name="no_stream">Radio station couldn\'t stream!</string>
     <string name="live_broadcast">On Air</string>
     <string name="radio_station">Radio station</string>
+    <string name="exit_quastion">Выйти?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>
